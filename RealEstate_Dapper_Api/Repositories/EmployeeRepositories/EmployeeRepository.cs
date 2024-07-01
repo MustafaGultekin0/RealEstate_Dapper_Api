@@ -62,7 +62,7 @@ namespace RealEstate_Dapper_Api.Repositories.EmployeeRepositories
             }
         }
 
-        public async void UpdateEmployee(UpdateEmployeeDto updateEmployeeDto)//Burada bir problem var
+        public async void UpdateEmployee(UpdateEmployeeDto updateEmployeeDto)
         {
             string query = "Update Employee Set Name = @name, Title=@title, Mail=@mail, PhoneNumber=@phoneNumber, ImageUrl=@imageUrl, Status=@status Where EmployeeID = @employeeID";
             var parameters = new DynamicParameters();

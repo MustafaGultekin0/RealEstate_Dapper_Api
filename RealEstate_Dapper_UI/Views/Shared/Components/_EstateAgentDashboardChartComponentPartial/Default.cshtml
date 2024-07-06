@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+    <div style="display: flex; justify-content: space-around;">
+        <canvas id="myBarChart" style="width:100%;max-width:500px"></canvas>
+        <canvas id="myPieChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+
+    <script>
+        const xValues = [];
+        const yValues = [];
+        const barColors = ["rgb(106 ,212,221)", "rgb(122 ,199,217)", "rgb(54 ,84,134)", "rgb(134 ,182,246)", "rgb(0 ,141,218)"];
+
+        @foreach (var item in Model)
+        {
+            <text>
+                xValues.push('@Html.Raw(item.City)');
+            yValues.push(@item.CityCount);
+            </text>
+        }
+
+            new Chart("myBarChart", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Şehir - İlan İstatistiği"
+                    }
+                }
+            });
+
+        const xValues1 = [];
+        const yValues1 = [];
+        const pieColors = ["rgb(106 ,212,221)", "rgb(122 ,199,217)", "rgb(54 ,84,134)", "rgb(134 ,182,246)", "rgb(0 ,141,218)"];
+
+        @foreach (var item1 in Model)
+        {
+            <text>
+                xValues1.push('@Html.Raw(item1.City)');
+            yValues1.push(@item1.CityCount);
+            </text>
+        }
+
+            new Chart("myPieChart", {
+                type: "pie",
+                data: {
+                    labels: xValues1,
+                    datasets: [{
+                        backgroundColor: pieColors,
+                        data: yValues1
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Şehir - İlan İstatistiği (Pie Chart)"
+                    }
+                }
+            });
+    </script>
+
+</body>
+</html>

@@ -58,6 +58,16 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
+        public async Task<List<ResultLast3ProductWithCategoryDto>> GetLast3ProductAsync()
+        {
+            string query = "Select Top(3) ProductID, Title, Price, City, District, ProductCategory, CategoryName, AdvertisementDate,Description, CoverImage From Product Inner Join Category on Product.ProductCategory=Category.CategoryID Order By ProductID Desc";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultLast3ProductWithCategoryDto>(query);
+                return values.ToList();
+            }
+        }
+
         public async Task<List<ResultLast5ProductWithCategoryDto>> GetLast5ProductAsync()
         {
             string query = "Select Top(5) ProductID, Title, Price, City, District, ProductCategory, CategoryName, AdvertisementDate From Product Inner Join Category on Product.ProductCategory=Category.CategoryID Where Type = 'Kiralık' Order By ProductID Desc";
@@ -105,6 +115,16 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
+        public async Task<List<ResultProductWithCategoryDto>> GetProductDealOfTheDayProductTrueWithCategoryAsync()
+        {
+            string query = "Select ProductID,Title,Price,City,District,CategoryName, CoverImage, Type, Address, DealOfTheDay From Product inner join Category on Product.ProductCategory=Category.CategoryID Where DealOfTheDay=1";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultProductWithCategoryDto>(query);
+                return values.ToList();
+            }
+        }
+
         public async Task<GetProductDetailByIdDto> GetProductDetailByProductID(int id)
         {
             string query = "Select * From ProductDetails Where ProductDetailID = @productDetailId";
@@ -139,6 +159,21 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             using (var connection = _context.CreateConnection())
             {
                 await connection.ExecuteAsync(query, parameters);
+            }
+        }
+
+        public async Task<List<ResultProductWithSearchListDto>> ResultProductWithSearchList(string searchKeyValue, int propertyCategoryID, string city)
+        {
+            string query = "Select * From Product Where Title like '%" + @searchKeyValue + "%' And ProductCategory = @propertyCategoryID and City = @city";
+            var parameters = new DynamicParameters();
+            //parameters.Add("@searchKeyValue", searchKeyValue);
+            parameters.Add("@propertyCategoryID", propertyCategoryID);
+            parameters.Add("@city", city);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultProductWithSearchListDto>(query, parameters);
+                return values.ToList();
             }
         }
     }

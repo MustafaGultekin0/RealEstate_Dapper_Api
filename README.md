@@ -1,6 +1,6 @@
-# Emlak Projesi
+# Real Estate Projesi
 
-Emlak projesine hoş geldiniz! Bu proje, emlakçıların mülk ilanlarını yönetebilecekleri ve yöneticilerin sistemi geniş özellikler ve gerçek zamanlı yeteneklerle denetleyebilecekleri kapsamlı bir platform sağlamayı amaçlamaktadır.
+Real Estate projesine hoş geldiniz! Bu proje, emlakçıların mülk ilanlarını yönetebilecekleri ve yöneticilerin sistemi geniş özellikler ve gerçek zamanlı yeteneklerle denetleyebilecekleri kapsamlı bir platform sağlamayı amaçlamaktadır.
 
 ## Kullanılan Teknolojiler
 
